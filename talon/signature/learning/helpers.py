@@ -112,7 +112,7 @@ def contains_sender_names(sender):
     >>> contains_sender_names("<serobnic@mail.ru>")("serobnic")
     1
     """
-    names = '( |$)|'.join(flatten_list([[e, e.capitalize()]
+    names = '( |$)|'.join(flatten_list([[e, e.capitalize(), e.upper()]
                                         for e in extract_names(sender)]))
     names = names or sender
     if names != '':
