@@ -71,6 +71,7 @@ RE_ON_DATE_SMB_WROTE = re.compile(
             'skrev',
             # Vietnamese
             u'đã viết',
+            u'написал', u'пишет'
         ))
     ))
 # Special case for languages where text is translated like this: 'on {date} wrote {somebody}:'
@@ -80,14 +81,16 @@ RE_ON_DATE_WROTE_SMB = re.compile(
         u'|'.join((
         	'Op',
         	#German
-        	'Am'
+        	'Am',
+            u'Вы'
         )),
         # Ending of the line
         u'|'.join((
             # Dutch
             'schreef','verzond','geschreven',
             # German
-            'schrieb'
+            'schrieb',
+            u'писали'
         ))
     )
     )
@@ -141,9 +144,9 @@ RE_ORIGINAL_MESSAGE = re.compile(u'[\s]*[-]+[ ]*({})[ ]*[-]+'.format(
 RE_FROM_COLON_OR_DATE_COLON = re.compile(u'((_+\r?\n)?[\s]*:?[*]?({})[\s]?:([^\n$]+\n){{1,2}}){{2,}}'.format(
     u'|'.join((
         # "From" in different languages.
-        'From', 'Van', 'De', 'Von', 'Fra', u'Från',
+        'From', 'Van', 'De', 'Von', 'Fra', u'Från', u'От', u'Від',
         # "Date" in different languages.
-        'Date', '[S]ent', 'Datum', u'Envoyé', 'Skickat', 'Sendt', 'Gesendet',
+        'Date', '[S]ent', 'Datum', u'Envoyé', 'Skickat', 'Sendt', 'Gesendet', u'Дата', u'Надіслано',
         # "Subject" in different languages.
         'Subject', 'Betreff', 'Objet', 'Emne', u'Ämne',
         # "To" in different languages.
@@ -182,7 +185,11 @@ SPLITTER_PATTERNS = [
     # Sent from Samsung MobileName <address@example.com> wrote:
     re.compile('Sent from Samsung.* \S+@\S+> wrote'),
     RE_ANDROID_WROTE,
-    RE_POLYMAIL
+    RE_POLYMAIL,
+    re.compile(u'.+ написал(\(а\))?:'),
+    re.compile('[^\n]+ schrieb am .+ um \d{2}:\d{2}:', re.S),
+    re.compile(u'.{2,11},\s\d{1,2}\.?\s.{3,8}\s\d{4},?\s(.+)<[^@]+@[^@]+>:'),
+    re.compile(u'(пн|вт|ср|чт|пт|сб|нд),?\s+(.+)\s+пише:?')
     ]
 
 RE_LINK = re.compile('<(http://[^>]*)>')
