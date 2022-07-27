@@ -48,6 +48,35 @@ Test quoted data
 
     eq_("Test reply", quotations.extract_from_plain(msg_body))
 
+def test_pattern_sent_from_ukr_net():
+    msg_body = """Hi Ella,
+
+Can you provide any reference that I can talk to?
+
+Thank you.
+
+27 июля 2022, 11:49:13, от ella.bogun@a-lead.ai:
+
+Hi Manny Packiao,
+Did you know that using our Virtual Sales Assistant can triple your company’s sales conversion, let you never lose a single lead, and help automatically set up calls with qualified leads for your sales reps.
+With A-lead, all sales sequences are managed automatically still giving your clients a feeling that they talk to a real person! Want to hear more?
+
+Let us schedule a call!
+
+July 28, 13:30, Europe/Kiev July 29, 10:30, Europe/Kiev August 01, 11:15, Europe/Kiev 
+
+Ella Bogun
+AI Virtual Assistant
+www.a-lead.ai
++380 (99) 132 5258"""
+
+    expected = """Hi Ella,
+
+Can you provide any reference that I can talk to?
+
+Thank you."""
+
+    eq_(expected, quotations.extract_from_plain(msg_body))
 
 def test_pattern_sent_from_samsung_smb_wrote():
     msg_body = """Test reply
