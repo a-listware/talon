@@ -25,6 +25,18 @@ RE_SIGNATURE = re.compile(r'''
                        ^best[ a-z]*[\s,!]*$
                        |
                        ^с\sуважением,\s(.+)$
+                       |
+                       ^ciao[ a-z]*[\s,!]*$
+                       |
+                       ^saluti[ a-z]*[\s,!]*$
+                       |
+                       ^saluto[ a-z]*[\s,!]*$
+                       |
+                       ^buona[ a-z]*[\s,!]*$
+                       |
+                       ^distinti[ a-z]*[\s,!]*$
+                       |
+                       ^cordiali[ a-z]*[\s,!]*$
                    )
                    .*
                )
@@ -45,6 +57,8 @@ RE_PHONE_SIGNATURE = re.compile(r'''
                        ^отправлено[ ](из|с)[ ].+$
                        |
                        ^надіслано[ ](з)[ ].+$
+                       |
+                       ^Inviato[ ]dal[ ]mio[ ]([\S]+[ ]){0,2}Iphone.*$
                    )
                    .*
                )

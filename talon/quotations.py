@@ -45,6 +45,8 @@ RE_ON_DATE_SMB_WROTE = re.compile(
             'Den',
             # Vietnamese
             u'Vào',
+            # Italian
+            'Il', 'In data', 'Il giorno',
         )),
         # Date and sender separator
         u'|'.join((
@@ -71,7 +73,10 @@ RE_ON_DATE_SMB_WROTE = re.compile(
             'skrev',
             # Vietnamese
             u'đã viết',
+            # Russian
             u'написал', u'пишет'
+            # Italian
+            'scritto', 'inviato',
         ))
     ))
 # Special case for languages where text is translated like this: 'on {date} wrote {somebody}:'
@@ -82,7 +87,10 @@ RE_ON_DATE_WROTE_SMB = re.compile(
         	'Op',
         	#German
         	'Am',
-            u'Вы'
+            # Russian
+            u'Вы',
+            # Italian
+            'In data', 'Il giorno', 'Il',
         )),
         # Ending of the line
         u'|'.join((
@@ -90,7 +98,10 @@ RE_ON_DATE_WROTE_SMB = re.compile(
             'schreef','verzond','geschreven',
             # German
             'schrieb',
-            u'писали'
+            # Russian
+            u'писали',
+            # Italian
+            'ha scritto', 'ha scritto:', 'ha inviato',
         ))
     )
     )
@@ -139,18 +150,20 @@ RE_ORIGINAL_MESSAGE = re.compile(u'[\s]*[-]+[ ]*({})[ ]*[-]+'.format(
         u'Ursprüngliche Nachricht', 'Antwort Nachricht',
         # Danish
         'Oprindelig meddelelse',
+        # Italiano
+        'Messaggio originale', 'Messaggio di risposta',
     ))), re.I)
 
 RE_FROM_COLON_OR_DATE_COLON = re.compile(u'((_+\r?\n)?[\s]*:?[*]?({})[\s]?:([^\n$]+\n){{1,2}}){{2,}}'.format(
     u'|'.join((
         # "From" in different languages.
-        'From', 'Van', 'De', 'Von', 'Fra', u'Från', u'От', u'Від',
+        'From', 'Van', 'De', 'Von', 'Fra', u'Från', u'От', u'Від', 'Da',
         # "Date" in different languages.
-        'Date', '[S]ent', 'Datum', u'Envoyé', 'Skickat', 'Sendt', 'Gesendet', u'Дата', u'Надіслано',
+        'Date', '[S]ent', 'Datum', u'Envoyé', 'Skickat', 'Sendt', 'Gesendet', u'Дата', u'Надіслано', 'Data',
         # "Subject" in different languages.
-        'Subject', 'Betreff', 'Objet', 'Emne', u'Ämne',
+        'Subject', 'Betreff', 'Objet', 'Emne', u'Ämne', 'Oggetto',
         # "To" in different languages.
-        'To', 'An', 'Til', u'À', 'Till'
+        'To', 'An', 'Til', u'À', 'Till', 'A',
     ))), re.I | re.M)
 
 # ---- John Smith wrote ----
