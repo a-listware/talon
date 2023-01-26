@@ -24,7 +24,7 @@ log = logging.getLogger(__name__)
 RE_FWD = re.compile("^[-]+[ ]*Forwarded message[ ]*[-]+\s*$", re.I | re.M)
 
 RE_ON_DATE_SMB_WROTE = re.compile(
-    u'(-*[>]?[ ]?({0})[ ].*({1})(.*\n){{0,2}}.*({2}):?-*)'.format(
+    u'(-*[>]?[ ]?({0})[, ].*({1})(.*\n){{0,2}}.*({2}):?-*)'.format(
         # Beginning of the line
         u'|'.join((
             # English
@@ -47,13 +47,17 @@ RE_ON_DATE_SMB_WROTE = re.compile(
             u'Vào',
             # Italian
             'Il', 'In data', 'Il giorno',
+            # Ukrainian (starts with weekday index)
+            'Пн', 'Вт','Ср', 'Чт', 'Пт', 'Сб', 'Нд'
         )),
         # Date and sender separator
         u'|'.join((
             # most languages separate date and sender address by comma
             ',',
             # polish date and sender address separator
-            u'użytkownik'
+            u'użytkownik',
+            # ukrainian date and sender address separator
+            u'користувач'
         )),
         # Ending of the line
         u'|'.join((
@@ -73,6 +77,8 @@ RE_ON_DATE_SMB_WROTE = re.compile(
             'skrev',
             # Vietnamese
             u'đã viết',
+            # Ukrainian
+            u'пише',
             # Russian
             u'написал', u'пишет'
             # Italian
